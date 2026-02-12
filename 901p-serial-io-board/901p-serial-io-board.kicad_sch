@@ -5,9 +5,9 @@
 	(uuid "df698308-057f-440f-9212-28acdb8c5e2b")
 	(paper "A4")
 	(lib_symbols
-		(symbol "Connector:Barrel_Jack"
+		(symbol "Connector:Barrel_Jack_MountingPin"
 			(pin_names
-				(offset 1.016)
+				(hide yes)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -20,12 +20,13 @@
 					)
 				)
 			)
-			(property "Value" "Barrel_Jack"
-				(at 0 -5.08 0)
+			(property "Value" "Barrel_Jack_MountingPin"
+				(at 1.27 -6.35 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 				)
 			)
 			(property "Footprint" ""
@@ -46,7 +47,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "DC Barrel Jack"
+			(property "Description" "DC Barrel Jack with a mounting pin"
 				(at 0 0 0)
 				(effects
 					(font
@@ -73,7 +74,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "Barrel_Jack_0_1"
+			(symbol "Barrel_Jack_MountingPin_0_1"
 				(rectangle
 					(start -5.08 3.81)
 					(end 5.08 -3.81)
@@ -145,7 +146,45 @@
 					)
 				)
 			)
-			(symbol "Barrel_Jack_1_1"
+			(symbol "Barrel_Jack_MountingPin_1_1"
+				(polyline
+					(pts
+						(xy -1.016 -4.572) (xy 1.016 -4.572)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(text "Mounting"
+					(at 0 -4.191 0)
+					(effects
+						(font
+							(size 0.381 0.381)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -7.62 90)
+					(length 3.048)
+					(name "MountPin"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "MP"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin passive line
 					(at 7.62 2.54 180)
 					(length 2.54)
@@ -890,7 +929,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector:DE9_Pins"
+		(symbol "Connector:DE9_Socket"
 			(pin_names
 				(offset 1.016)
 				(hide yes)
@@ -906,7 +945,7 @@
 					)
 				)
 			)
-			(property "Value" "DE9_Pins"
+			(property "Value" "DE9_Socket"
 				(at 0 -14.605 0)
 				(effects
 					(font
@@ -932,7 +971,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "9-pin D-SUB connector, pins (male)"
+			(property "Description" "9-pin D-SUB connector, socket (female)"
 				(at 0 0 0)
 				(effects
 					(font
@@ -950,7 +989,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "DSUB*Pins*"
+			(property "ki_fp_filters" "DSUB*Socket*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -959,7 +998,19 @@
 					(hide yes)
 				)
 			)
-			(symbol "DE9_Pins_0_1"
+			(symbol "DE9_Socket_0_1"
+				(polyline
+					(pts
+						(xy -3.81 13.335) (xy -3.81 -13.335) (xy 3.81 -9.525) (xy 3.81 9.525) (xy -3.81 13.335)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
 				(polyline
 					(pts
 						(xy -3.81 10.16) (xy -2.54 10.16)
@@ -1068,18 +1119,6 @@
 						(type none)
 					)
 				)
-				(polyline
-					(pts
-						(xy -3.81 -13.335) (xy -3.81 13.335) (xy 3.81 9.525) (xy 3.81 -9.525) (xy -3.81 -13.335)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
 				(circle
 					(center -1.778 10.16)
 					(radius 0.762)
@@ -1088,7 +1127,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(circle
@@ -1099,7 +1138,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(circle
@@ -1110,7 +1149,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(circle
@@ -1121,7 +1160,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(circle
@@ -1132,7 +1171,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(circle
@@ -1143,7 +1182,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(circle
@@ -1154,7 +1193,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(circle
@@ -1165,7 +1204,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(circle
@@ -1176,22 +1215,22 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 			)
-			(symbol "DE9_Pins_1_1"
+			(symbol "DE9_Socket_1_1"
 				(pin passive line
 					(at -7.62 10.16 0)
 					(length 3.81)
-					(name "5"
+					(name "1"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "5"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1202,14 +1241,14 @@
 				(pin passive line
 					(at -7.62 7.62 0)
 					(length 3.81)
-					(name "9"
+					(name "6"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "9"
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1220,14 +1259,14 @@
 				(pin passive line
 					(at -7.62 5.08 0)
 					(length 3.81)
-					(name "4"
+					(name "2"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "4"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1238,14 +1277,14 @@
 				(pin passive line
 					(at -7.62 2.54 0)
 					(length 3.81)
-					(name "8"
+					(name "7"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "8"
+					(number "7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1274,14 +1313,14 @@
 				(pin passive line
 					(at -7.62 -2.54 0)
 					(length 3.81)
-					(name "7"
+					(name "8"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "7"
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1292,14 +1331,14 @@
 				(pin passive line
 					(at -7.62 -5.08 0)
 					(length 3.81)
-					(name "2"
+					(name "4"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "2"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1310,14 +1349,14 @@
 				(pin passive line
 					(at -7.62 -7.62 0)
 					(length 3.81)
-					(name "6"
+					(name "9"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "6"
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1328,14 +1367,14 @@
 				(pin passive line
 					(at -7.62 -10.16 0)
 					(length 3.81)
-					(name "1"
+					(name "5"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "1"
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1352,6 +1391,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8375b6b5-19c4-404f-ac73-0101747af8cf")
+	)
+	(junction
+		(at 45.72 85.09)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dc2d9d33-9e5e-4688-9f84-68b28b8022b3")
 	)
 	(junction
 		(at 62.23 85.09)
@@ -1374,6 +1419,16 @@
 			(type default)
 		)
 		(uuid "381ba81e-4e4b-4739-a1e4-60e13a8848c2")
+	)
+	(wire
+		(pts
+			(xy 45.72 85.09) (xy 45.72 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "42158395-7cee-4e09-80c1-629e93c5e02f")
 	)
 	(wire
 		(pts
@@ -1424,6 +1479,16 @@
 			(type default)
 		)
 		(uuid "906560a3-573f-4737-8982-4734023b4e38")
+	)
+	(wire
+		(pts
+			(xy 38.1 90.17) (xy 45.72 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "95936c6f-c8ce-486b-a54f-5abda646a171")
 	)
 	(wire
 		(pts
@@ -1484,7 +1549,7 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "08aa53d6-f093-466c-b537-b894011c046a")
+		(uuid "10c000e9-fcc6-4b45-9f94-801286eaf66a")
 		(property "Reference" "J5"
 			(at 78.74 83.8199 0)
 			(effects
@@ -1494,7 +1559,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Banana Plug (V-)"
+		(property "Value" "V-"
 			(at 78.74 86.3599 0)
 			(effects
 				(font
@@ -1503,7 +1568,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Banana_Cinch_105_1102_001:CINCH_105-1102-001"
 			(at 77.47 85.09 0)
 			(effects
 				(font
@@ -1531,7 +1596,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "eed348b5-c7da-4978-9c26-b93e9ab60caa")
+			(uuid "ec66bca9-4e61-4a86-b022-78e590bda31b")
 		)
 		(instances
 			(project ""
@@ -1543,18 +1608,17 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:DE9_Pins")
-		(at 77.47 50.8 0)
-		(mirror x)
+		(lib_id "Connector:DE9_Socket")
+		(at 77.47 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "4ec372d0-58d5-4be5-9187-195e4a954aeb")
+		(uuid "260ea595-d5ae-4a0f-8ad6-91def6fa40c5")
 		(property "Reference" "J2"
-			(at 82.55 52.0701 0)
+			(at 82.55 52.0699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1562,8 +1626,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "DE9"
-			(at 82.55 49.5301 0)
+		(property "Value" "DE9_Socket"
+			(at 82.55 54.6099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1571,8 +1635,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 77.47 50.8 0)
+		(property "Footprint" "DE9_Amphenol_LD09S24A4GV00LF:AMPHENOL_LD09S24A4GV00LF"
+			(at 77.47 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1581,7 +1645,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 77.47 50.8 0)
+			(at 77.47 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1589,41 +1653,41 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "9-pin D-SUB connector, pins (male)"
-			(at 77.47 50.8 0)
+		(property "Description" "9-pin D-SUB connector, socket (female)"
+			(at 77.47 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
 			)
-		)
-		(pin "8"
-			(uuid "31babf92-b13e-4e45-bc23-58083593fe98")
-		)
-		(pin "3"
-			(uuid "20e2fcab-d892-4f75-b759-ef50d0344cb0")
-		)
-		(pin "7"
-			(uuid "1ea4868c-2a47-4521-98aa-066a7e9ad05f")
-		)
-		(pin "9"
-			(uuid "7294ffb4-d208-40e8-b654-500dac50f10c")
-		)
-		(pin "5"
-			(uuid "d3679b7e-704a-4129-8146-82039ca53816")
-		)
-		(pin "1"
-			(uuid "166278fd-53a2-4ae6-b497-f680b133972d")
-		)
-		(pin "6"
-			(uuid "1a339a1c-fe37-479d-812a-cad7ab7c21d8")
-		)
-		(pin "2"
-			(uuid "e689b16c-2ee6-4395-af54-8ee1385d395b")
 		)
 		(pin "4"
-			(uuid "b078affd-d28a-4764-a485-8092195b7841")
+			(uuid "fe283a0c-c149-41bb-9087-281dc398a3ce")
+		)
+		(pin "9"
+			(uuid "515daab4-74cb-4153-987d-8689b271f4f6")
+		)
+		(pin "5"
+			(uuid "2292c54b-d661-48cd-8382-5c15565236fe")
+		)
+		(pin "1"
+			(uuid "4fcc669c-8572-4883-a527-7baf33bcd03c")
+		)
+		(pin "3"
+			(uuid "d5ff4cb9-7124-4933-9711-2012f4b6a159")
+		)
+		(pin "6"
+			(uuid "e278c807-9703-49ff-9652-8c3503d8fc37")
+		)
+		(pin "2"
+			(uuid "8b3efb51-9c61-485d-80f8-2dcf74dfdfdc")
+		)
+		(pin "7"
+			(uuid "9c843879-b5ef-4a89-a1be-6c9c94609261")
+		)
+		(pin "8"
+			(uuid "4afb91a9-f093-4e43-8c43-ee1e6cc70814")
 		)
 		(instances
 			(project ""
@@ -1635,7 +1699,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Barrel_Jack")
+		(lib_id "Connector:Barrel_Jack_MountingPin")
 		(at 38.1 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1643,7 +1707,7 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "81ef7501-da8e-4382-a86e-fd83e86d0251")
+		(uuid "47ec2c78-4aad-41fa-b9d0-4a9fe1a2553f")
 		(property "Reference" "J3"
 			(at 38.1 73.66 0)
 			(effects
@@ -1652,7 +1716,7 @@
 				)
 			)
 		)
-		(property "Value" "Barrel Jack"
+		(property "Value" "Barrel_Jack_MountingPin"
 			(at 38.1 76.2 0)
 			(effects
 				(font
@@ -1660,7 +1724,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Barrel_SameSky_PJ-002B:CUI_PJ-002B"
 			(at 39.37 83.566 0)
 			(effects
 				(font
@@ -1678,7 +1742,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "DC Barrel Jack"
+		(property "Description" "DC Barrel Jack with a mounting pin"
 			(at 38.1 82.55 0)
 			(effects
 				(font
@@ -1688,10 +1752,13 @@
 			)
 		)
 		(pin "2"
-			(uuid "d7f8ded8-850d-4033-b99e-e082516a505d")
+			(uuid "949cd3ae-7e91-4940-b22f-0eef2cfbef5c")
 		)
 		(pin "1"
-			(uuid "8baff89f-f624-4811-b7b3-222c2ed54cb8")
+			(uuid "44f13b38-9575-481a-8abb-5330e62ac4d8")
+		)
+		(pin "MP"
+			(uuid "022709a8-2327-4cd6-8e82-44694e72d5f9")
 		)
 		(instances
 			(project ""
@@ -1729,7 +1796,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "DE15_Amphenol_ICD15S13E4GX00LF:AMPHENOL_ICD15S13E4GX00LF"
 			(at 62.23 45.72 0)
 			(effects
 				(font
@@ -1819,7 +1886,7 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "e8bb1fa9-a91b-4d48-9d7e-b578f38f5d98")
+		(uuid "b1d8fd29-0a03-423f-9362-f3f213cd0743")
 		(property "Reference" "J4"
 			(at 78.74 78.7399 0)
 			(effects
@@ -1829,7 +1896,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Banana Plug (V+)"
+		(property "Value" "V+"
 			(at 78.74 81.2799 0)
 			(effects
 				(font
@@ -1838,7 +1905,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Banana_Cinch_105_1102_001:CINCH_105-1102-001"
 			(at 77.47 80.01 0)
 			(effects
 				(font
@@ -1866,7 +1933,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "eed348b5-c7da-4978-9c26-b93e9ab60caa")
+			(uuid "ec66bca9-4e61-4a86-b022-78e590bda31c")
 		)
 		(instances
 			(project ""

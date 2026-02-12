@@ -1,4 +1,4 @@
-26562765686472332
+26569827395618388
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -13,6 +13,20 @@ audio belton reverb
 0
 7
 7
+Banana_Cinch_105_1102_001
+CINCH_105-1102-001
+
+
+0
+2
+2
+Barrel_SameSky_PJ-002B
+CUI_PJ-002B
+
+
+0
+3
+3
 Battery
 BatteryClip_Keystone_54_D16-19mm
 Battery clip for batteries with a diameter between 16-19 mm: https://www.keyelco.com/product.cfm/product_id/826
@@ -58001,6 +58015,20 @@ ceramic
 0
 3
 3
+DE9_Amphenol_LD09S24A4GV00LF
+AMPHENOL_LD09S24A4GV00LF
+
+
+0
+11
+11
+DE15_Amphenol_ICD15S13E4GX00LF
+AMPHENOL_ICD15S13E4GX00LF
+
+
+0
+17
+17
 Diode_SMD
 D_0201_0603Metric
 Diode SMD 0201 (0603 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: https://www.vishay.com/docs/20052/crcw0201e3.pdf), generated with kicad-footprint-generator
