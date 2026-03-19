@@ -2,6 +2,6 @@
   (version 7)
   (lib (name "Barrel_SameSky_PJ-002B")(type "KiCad")(uri "${KIPRJMOD}/libs/SameSky_PJ-002B")(options "")(descr ""))
   (lib (name "DE15_Amphenol_ICD15S13E4GX00LF")(type "KiCad")(uri "${KIPRJMOD}/libs/Amphenol_ICD15S13E4GX00LF")(options "")(descr ""))
-  (lib (name "DE9_Amphenol_LD09S24A4GV00LF")(type "KiCad")(uri "${KIPRJMOD}/libs/Amphenol_LD09S24A4GV00LF")(options "")(descr ""))
+  (lib (name "DE9_Amphenol_LD09S33E4GV00LF")(type "KiCad")(uri "${KIPRJMOD}/libs/Amphenol_LD09S33E4GV00LF")(options "")(descr ""))
   (lib (name "Banana_Cinch_105_1102_001")(type "KiCad")(uri "${KIPRJMOD}/libs/Cinch_105_1102_001")(options "")(descr ""))
 )
