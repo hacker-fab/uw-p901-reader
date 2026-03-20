@@ -59,15 +59,22 @@ void loop() {
   ser_recvbuf[buf_idx] = 0; //null terminate
   if (ser_timeout < SERIAL_TIMEOUT) {
     String bufstring;
+    String numval;
+    double floatval;
+    char printbuf[50];
     bufstring = (String)ser_recvbuf;
     if (!user_input) {
       if (bufstring.substring(0,7) == "@253ACK") {
-        lcd.print(bufstring .substring(7));
+        numval = bufstring.substring(7, 15);
+        floatval = numval.toFloat();
+        sprintf(printbuf, "%.2f mTorr", floatval*1000);
+        lcd.print(printbuf);
       } else {
         lcd.print("weird response, retry...\n");
       }
     }
     Serial.println(ser_recvbuf);
+    Serial.println(numval);
     
   } else {
     lcd.print("no response, retry...\n");
