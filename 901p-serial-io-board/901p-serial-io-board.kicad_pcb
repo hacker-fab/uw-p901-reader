@@ -1896,17 +1896,6 @@
 		(layer "Edge.Cuts")
 		(uuid "13478613-ac8a-4fd2-b1e3-08f80ae311e4")
 	)
-	(gr_text "901P\nSERIAL\nADAPTER"
-		(at 128 81.4 0)
-		(layer "F.SilkS")
-		(uuid "e3acd031-b3dc-43d5-9d8c-cceef6c86317")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
 	(gr_text "ANALOG"
 		(at 135.8 75.1 0)
 		(layer "F.SilkS")
@@ -1962,6 +1951,18 @@
 				(thickness 0.3)
 				(bold yes)
 			)
+		)
+	)
+	(gr_text "901P SERIAL/ANALOG ADAPTER v0.1\nPOWER: +9-30 VDC"
+		(at 140 58.8 0)
+		(layer "B.SilkS")
+		(uuid "9de77e06-c9ea-4ffb-86de-98ee80e12b3a")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify mirror)
 		)
 	)
 	(segment
