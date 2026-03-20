@@ -1949,7 +1949,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "DE9_Amphenol_LD09S24A4GV00LF:AMPHENOL_LD09S24A4GV00LF"
+		(property "Footprint" "DE9_Amphenol_LD09S33E4GV00LF:AMPHENOL_LD09S33E4GV00LF"
 			(at 77.47 50.8 0)
 			(effects
 				(font
