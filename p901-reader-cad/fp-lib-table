@@ -5,4 +5,5 @@
   (lib (name "ESP32-DEVKIT-V1")(type "KiCad")(uri "${KIPRJMOD}/libs/Doit_ESP32")(options "")(descr ""))
   (lib (name "SameSky_PJ-002B")(type "KiCad")(uri "${KIPRJMOD}/libs/SameSky_PJ-002B")(options "")(descr ""))
   (lib (name "Kyocera_AVX601030")(type "KiCad")(uri "${KIPRJMOD}/libs/Kyocera_AVX601030/footprints.pretty")(options "")(descr ""))
+  (lib (name "hackerfab_logo")(type "KiCad")(uri "${KIPRJMOD}/libs/hackerfab_logo")(options "")(descr ""))
 )
