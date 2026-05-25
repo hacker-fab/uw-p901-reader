@@ -9461,7 +9461,7 @@
 				)
 			)
 		)
-		(property "Value" "80 mA"
+		(property "Value" "500 mA"
 			(at 29.21 24.13 90)
 			(show_name no)
 			(do_not_autoplace no)

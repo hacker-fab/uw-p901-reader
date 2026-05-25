@@ -1,0 +1,8 @@
+﻿Part,Manufacturer,Part Number,Quantity,Price ($),Footprint (mm²),Description
+Cin,MuRata,GRM31CR71C106KAC7L,1,0.08,10.92,Cap: 10 µF  Total Derated Cap: 5.9 µF  VDC: 16 V  ESR: 4.16 mΩ  Package: 1206  
+Cout,Taiyo Yuden,MCASA21GAB5226MTNA01,1,0.05843,6.75,Cap: 22 µF  Total Derated Cap: 12 µF  VDC: 4 V  ESR: 4.12 mΩ  Package: 0805  
+Css,MuRata,GRM1555C1E431JA01D,1,0.02,3,Cap: 430 pF  Total Derated Cap: 430 pF  VDC: 25 V  ESR: 1 mΩ  Package: 0402  
+Rfbb,Vishay-Dale,CRCW0402100KFKED,1,0.01,3,Resistance: 100 kΩ  Tolerance: 1.0%  Power: 63 mW  
+Rfbt,Vishay-Dale,CRCW0402309KFKED,1,0.01,3,Resistance: 309 kΩ  Tolerance: 1.0%  Power: 63 mW  
+Rpg,Vishay-Dale,CRCW0402100KFKED,1,0.01,3,Resistance: 100 kΩ  Tolerance: 1.0%  Power: 63 mW  
+U1,Texas Instruments,TPS82140SILR,1,1.973,15.2,
