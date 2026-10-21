@@ -178,16 +178,6 @@ void serialPassthru() {
 }
 
 void loop() {
-  // Serial1.write("@253GT!AIR;FF");
-  // while (Serial1.read() != '@') {}
-  // auto s = Serial1.readStringUntil(';');
-  // while (!Serial1.available()); Serial1.read();
-  // while (!Serial1.available()); Serial1.read();
-
-  // Serial.print("read: ");
-  // Serial.println(s);
-
-  // delay(500);
   tryReadPressure();
   delay(250);
 }
