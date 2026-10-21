@@ -46,6 +46,8 @@ public:
   // Returns -1 if the voltage is invalid or the profile is unavailable.
   int checkVoltage(Volts volts);
 
+  // Requests a specific voltage. You may check currentProfile() after to
+  // check if the profile could be switched to.
   void requestVoltage(Volts volts);
 
 private:

@@ -1,6 +1,6 @@
 #include "HUSB238.hpp"
 
-#include "WireExt.hpp"
+#include "CommUtils.hpp"
 
 constexpr uint8_t REG_PDSTATUS_0 = 0x00;
 constexpr uint8_t REG_SRC_PDO = 0x08;
@@ -38,6 +38,8 @@ int HUSB238::checkVoltage(HUSB238::Volts volts) {
 }
 
 void HUSB238::requestVoltage(HUSB238::Volts volts) {
+  if (volts == VNone)
+    return;
   uint8_t pdoRequest = uint8_t(volts) << 4;
   wireRegisterWriteByte(_addr, REG_SRC_PDO, pdoRequest, _wire);
   wireRegisterWriteByte(_addr, REG_GO_COMMAND, CMD_REQUEST_PDO);

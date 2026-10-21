@@ -4,7 +4,7 @@
 
 #include "ST7036.hpp"
 #include "ST7036_Protocol.hpp"
-#include "WireExt.hpp"
+#include "CommUtils.hpp"
 
 ST7036::ST7036(TwoWire& wire, uint8_t addr, uint8_t lines, uint8_t cols) : 
   _wire(wire), 
