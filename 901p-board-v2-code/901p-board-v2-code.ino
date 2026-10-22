@@ -1,13 +1,16 @@
 // #define NDEBUG
 
 #include <cstdint>
+#include <cstring>
 #include <Arduino.h>
 #include <Wire.h>
 
-#include "WireExt.hpp"
 #include "HUSB238.hpp"
 #include "MKS_901P.hpp"
 #include "ST7036.hpp"
+
+#include "CommUtils.hpp"
+#include "DisplayUtils.hpp"
 
 // PIN NUMBERS
 // ===========================
@@ -30,6 +33,7 @@ constexpr uint8_t I2C_LCD = 0x3C;
 ST7036 lcd {Wire, I2C_LCD};
 HUSB238 pdo {Wire, I2C_PD};
 MKS_901P sensor {Serial1};
+
 
 // SETUP FUNCTIONS
 // ===========================
@@ -54,6 +58,7 @@ void setupLCD() {
   if (!wirePing(I2C_LCD))
     abort();
   lcd.begin();
+  lcd.setContrast(24); // this seems to be nice
 }
 
 bool setupPD() {
@@ -97,12 +102,6 @@ void setup() {
   setupLCD();
   Serial.println("LCD done");
 
-  if (Serial1.available()) {
-    Serial.write(Serial1.read());
-  }
-  if (Serial.available()) {
-    Serial1.write(Serial.read());
-  }
   if (!setupPD())
     Serial.println("PDO error!");
   Serial.println("PDO done");
@@ -115,69 +114,120 @@ void setup() {
 // MAIN PROGRAM LOOP
 // ===========================
 
-void displayPressureScaled(int mantissa, int exponent, const char* trailing) {
-  assert(0 <= exponent && exponent < 3);
+// CLI line buffer
+static char inBuffer[256] = {};
+static size_t inIdx = 0;
+constexpr size_t inLastIndex = sizeof(inBuffer) - 1;
 
-  constexpr int pow10[] = {1, 10, 100, 1000, 10'000};
+// pressure reading
+static char lcdBuffer[41] = {};
+static int msPressureLast = 0;
 
-  int fDigits = 3 - exponent;
-  int fFactor = pow10[fDigits];
 
-  uint iPart = mantissa / fFactor;
-  uint fPart = mantissa % fFactor;
+static const char* helpMessage[] = {
+  "Available commands:\n"
+  "help                  Show this help message\n"
+  "set-gas <gas>         Set the sensor gas type (refer to MKS 901P manual)\n"
+  "contrast <contrast>   Set the LCD contrast (0 - 63)\n"
+};
 
-  lcd.setCursor(0, 0);
-  size_t printLen = lcd.printf("%0*u.%0*u %s", 4 - fDigits, iPart, fDigits, fPart, trailing);
-  lcd.printf("%*s", int(20 - printLen), "");
+void handleCLI() {
+  char arg_str[16] = {};
+  int arg_int = 0;
+
+  if (strncmp(inBuffer, "help", 4) == 0) {
+    // HELP
+    for (const char* line: helpMessage) {
+      Serial.print(line);
+    }
+
+  } else if (sscanf(inBuffer, "set-gas %15s", arg_str) == 1) {
+    // SET GAS TYPE
+    int type = MKS_901P::toGasType(arg_str);
+    if (type < 0) {
+      Serial.println("set-gas: invalid gas type");
+      return;
+    }
+    auto res = sensor.writeGasType((MKS_901P::GasType) type);
+    if (res == MKS_901P::ErrNone) {
+      Serial.println("success");
+    } else {
+      Serial.print("error: ");
+      Serial.println(MKS_901P::toString(res));
+    }
+  } else if (sscanf(inBuffer, "contrast %d", &arg_int) == 1) {
+    // SET DISPLAY CONTRAST
+    const int contrast = arg_int;
+    if (contrast < 0 || contrast > 63) {
+      Serial.println("contrast: invalid contrast value");
+    }
+    lcd.setContrast(contrast);
+    Serial.println("success");
+  } else {
+    Serial.println("Unrecognized command. Type `help` for help.");
+  }
 }
-void displayPressureScientific(int mantissa, int exponent, const char* trailing) {
-  int iPart = mantissa / 1000;
-  int fPart = mantissa % 1000;
 
-  lcd.setCursor(0, 0);
-  size_t printLen = lcd.printf("%01u.%03ue%d %s", iPart, fPart, exponent, trailing);
-  lcd.printf("%*s", int(20 - printLen), "");
-}
+void tryReadCLI() {
+  while (Serial.available() > 0) {
+    int next = Serial.read();
 
-void displayPressure(int mantissa, int exponent) {
-  if (exponent < -3 || exponent >= 3)
-    displayPressureScientific(mantissa, exponent, "torr");
-  else if (exponent < 0)
-    displayPressureScaled(mantissa, exponent + 3, "mtorr");
-  else if (exponent < 3)
-    displayPressureScaled(mantissa, exponent, "torr");
+    if (inIdx == inLastIndex) {
+      if (next == '\n') {
+        memset(inBuffer, 0, sizeof(inBuffer));
+        inIdx = 0;
+        Serial.println("Line too long, try again.");
+      }
+      continue;
+    }
+
+    if (next == '\b') {
+      if (inIdx > 0)
+        inBuffer[--inIdx] = '\0';
+      Serial.print("\b \b");
+      continue;
+    }
+
+    Serial.write((char) next);
+
+    if (next == '\n') {
+      handleCLI();
+      memset(inBuffer, 0, sizeof(inBuffer));
+      inIdx = 0;
+    } else {
+      inBuffer[inIdx++] = next;
+    }
+  }
 }
 
 void tryReadPressure() {
-  std::pair<int, int> pressure = {};
-  if (auto res = sensor.readPR4(pressure); res != MKS_901P::ErrNone) {
+  static std::pair<int, int> pressure = {};
+  static MKS_901P::GasType gasType = {};
+
+  if (sensor.readPR4(pressure) != MKS_901P::ErrNone)
     return;
+  if (sensor.readGasType(gasType) != MKS_901P::ErrNone)
+    return;
+
+  {
+    // first line
+    auto [mantissa, exponent] = pressure;
+    strfReadingSI(lcdBuffer, sizeof(lcdBuffer), mantissa, exponent, "torr");
+    lcd.setCursor(0, 0);
+    lcd.printf("%-20s", lcdBuffer);
   }
-
-  auto [mantissa, exponent] = pressure;
-  displayPressure(mantissa, exponent);
-}
-
-int sendBegin = 0;
-
-void serialPassthru() {
-  if (Serial.available()) {
-    int c = Serial.read();
-    if (c == '@') sendBegin = micros();
-    Serial1.write(c);
-  }
-  if (Serial1.available()) {
-    int c = Serial1.read();
-    if (c == '@') {
-      int time = micros() - sendBegin;
-      Serial.printf("[delay %d]", time);
-    }
-    Serial.write(c);
-    
+  {
+    snprintf(lcdBuffer, sizeof(lcdBuffer), "gas: %s", MKS_901P::toString(gasType));
+    lcd.setCursor(0, 1);
+    lcd.printf("%-20s", lcdBuffer);
   }
 }
 
 void loop() {
-  tryReadPressure();
-  delay(250);
+  int now = millis();
+  if (now - msPressureLast > 250) {
+    msPressureLast = now;
+    tryReadPressure();
+  }
+  tryReadCLI();
 }

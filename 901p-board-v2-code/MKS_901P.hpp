@@ -10,12 +10,12 @@ public:
   static constexpr uint8_t NoAddress = 254;
 
   enum Error {
-    // The operation succeeded
-    ErrNone = 0,
-    // Sensor reply could not be correctly parsed
-    ErrParseFailed = -1,
     // Query was too long and could not be sent
     ErrSendFailed = -2,
+    // Sensor reply could not be correctly parsed
+    ErrParseFailed = -1,
+    // The operation succeeded
+    ErrNone = 0,
     // Zero adjustment at too high pressure
     ErrVAC = 8,
     // Atmospheric adjustment at too low pressure
@@ -50,6 +50,12 @@ public:
     GasXenon
   };
 
+  static const char* toString(Error err);
+  static const char* toString(Units units);
+  static const char* toString(GasType gasType);
+  static int toUnits(const char* str);
+  static int toGasType(const char* str);
+
   MKS_901P(Stream& serial = Serial, uint8_t addr = NoAddress);
 
   // Returns the currently-active transmission address
@@ -65,12 +71,12 @@ public:
   // Issues a raw query, returning a string view pointing to an internal buffer with the result.
   // The data referred to by the string view is always followed by a null terminator. However,
   // it will be invalidated on the next query or command issued.
-  // 
+  //
   // Returns ErrNone if succeeded, or the error code if failed.
   Error rawQuery(const char* cmd, std::string_view& result);
 
   // Issues a raw command with the provided parameter.
-  // 
+  //
   // Returns ErrNone if succeeded, or the error code if failed.
   Error rawCommand(const char* cmd, const char* param);
 
@@ -91,7 +97,7 @@ public:
   Error readGasType(GasType& gas);
   // Sets the gas type.
   Error writeGasType(GasType gas);
-  
+
 private:
   Error transact(size_t sendLen, std::string_view* result = nullptr);
 

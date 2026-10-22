@@ -88,6 +88,8 @@ public:
     _autoscroll = false;
     syncEntryMode();
   }
+
+  void setContrast(uint8_t value);
   
   size_t write(uint8_t data) override;
   size_t write(const uint8_t* data, size_t size) override;

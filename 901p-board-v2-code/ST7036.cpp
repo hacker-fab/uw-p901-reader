@@ -30,8 +30,8 @@ bool ST7036::begin() {
     ctrlCmds(),
     functionSet(1, _lines > 1),
     biasSet(false, _lines > 2),
-    contrastSetLo(0x23),
-    contrastSetHi(0x23),
+    contrastSetLo(0x3F),
+    contrastSetHi(0x3F),
     followerCtrl(6),
     displayOnOff(true),
     entryModeSet(true),
@@ -107,6 +107,18 @@ void ST7036::scrollDisplayRight() {
     shiftDisplay(true),
   });
 
+}
+
+void ST7036::setContrast(uint8_t value) {
+  using namespace ST7036_Protocol;
+  assert(_init && value < 64);
+
+  wirePacket(_addr, {
+    ctrlCmds(),
+    functionSet(1, _lines > 1),
+    contrastSetLo(value),
+    contrastSetHi(value),
+  });
 }
 
 // DATA WRITES

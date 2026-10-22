@@ -1,40 +1,86 @@
-#include "esp32-hal.h"
 #include "MKS_901P.hpp"
 
 #include <algorithm>
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
+#include <iterator>
 #include <string_view>
 
 #include <Arduino.h>
 
 namespace {
+const char* error_strs[] = {
+  "Query was too long and could not be sent",
+  "Sensor reply could not be correctly parsed",
+  "The operation succeeded",
+  "Zero adjustment at too high pressure",
+  "Atmospheric adjustment at too low pressure",
+  "Unrecognized message",
+  "Invalid argument",
+  "Value out of Range",
+  "Command/query character invalid",
+  "Not in setup mode",
+};
+const int error_vals[] = {
+  -2,
+  -1,
+  0,
+  8,
+  9,
+  160,
+  169,
+  172,
+  175,
+  180,
+};
+
 const char* unit_strs[] = {
-  "TORR",
-  "MBAR",
-  "PASCAL"
+  "torr",
+  "mbar",
+  "pascal"
 };
 const char* gas_strs[] = {
-  "NITROGEN",
-  "AIR",
-  "ARGON",
-  "HELIUM",
-  "HYDROGEN",
-  "H2O",
-  "NEON",
-  "CO2",
-  "XENON",
+  "nitrogen",
+  "air",
+  "argon",
+  "helium",
+  "hydrogen",
+  "h2o",
+  "neon",
+  "co2",
+  "xenon",
 };
 
 template <size_t N>
 int revLookup(const char* key, const char* (&table)[N]) {
   for (size_t i = 0; i < N; i++) {
-    if (strcmp(key, table[i]) == 0)
+    if (strcasecmp(key, table[i]) == 0)
       return i;
   }
   return -1;
 }
+}
+
+const char* MKS_901P::toString(Error err) {
+  auto err_match = std::lower_bound(std::begin(error_vals), std::end(error_vals), (int) err);
+  if (*err_match != err)
+    return "(unknown)";
+
+  int index = err_match - std::begin(error_vals);
+  return error_strs[index];
+}
+const char* MKS_901P::toString(Units units) {
+  return unit_strs[(int) units];
+}
+const char* MKS_901P::toString(GasType gasType) {
+  return gas_strs[(int) gasType];
+}
+int MKS_901P::toUnits(const char* str) {
+  return revLookup(str, unit_strs);
+}
+int MKS_901P::toGasType(const char* str) {
+  return revLookup(str, gas_strs);
 }
 
 MKS_901P::MKS_901P(Stream& serial, uint8_t addr) : _serial(serial), _addr(addr) {
@@ -46,7 +92,7 @@ MKS_901P::MKS_901P(Stream& serial, uint8_t addr) : _serial(serial), _addr(addr) 
 bool MKS_901P::begin() {
   if (_init)
     return true;
-  
+
   // send test message. if NoAddress, this works fine anyways.
   int sendLen = snprintf(_sendBuf.data(), _sendBuf.size(), "@%03uT?;FF", _addr);
   int testRes = transact(sendLen);
@@ -55,8 +101,8 @@ bool MKS_901P::begin() {
     Serial.println(testRes);
     return false;
   }
-  
-  // the response should be valid either way, so save the address from this 
+
+  // the response should be valid either way, so save the address from this
   // request if we don't have one
   if (_addr == NoAddress) {
     char parseBuffer[4] = {};
@@ -188,4 +234,3 @@ MKS_901P::Error MKS_901P::readGasType(GasType& gas) {
 MKS_901P::Error MKS_901P::writeGasType(GasType gas) {
   return rawCommand("GT", gas_strs[(size_t) gas]);
 }
-
